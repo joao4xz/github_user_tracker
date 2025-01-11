@@ -5,30 +5,23 @@ import type { User } from './@types/user.d.ts'
 function App() {
   const [submitValue, setSubmitValue] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [user, setUser] = useState<User>({
-    name: '',
-    username: '',
-    image_url: '',
-    repo_num: 0,
-    followers_num: 0,
-    following_num: 0,
-  })
+  const [users, setUsers] = useState<User[]>([])
 
   useEffect(() => {
     if (submitValue) {
       fetchUserData(submitValue).then(userData => {
         console.log(userData);
         if (userData) {
-          setUser({
+          setUsers([...users, {
             name: userData.name,
             username: userData.login,
             image_url: userData.avatar_url,
             repo_num: userData.public_repos,
             followers_num: userData.followers,
             following_num: userData.following,
-          })
+          }]);
         }
-      });
+      })
     }
   }, [submitValue]);
 
@@ -46,8 +39,14 @@ function App() {
       >
         Add user
       </button>
-      <p>{user.name}</p>
-      <img src={user.image_url} />
+      {
+        users.map((user) => {
+          return <div key={user.username}>
+            <p>{user.name}</p>
+            <img src={user.image_url} />
+          </div>
+        })
+      }
     </div>
   )
 }

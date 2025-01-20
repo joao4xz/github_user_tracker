@@ -1,15 +1,17 @@
-import { Card, CardContent, CardHeader } from "./ui/card"
-import { User, Users, BookMarked } from 'lucide-react'
+import { Card, CardContent, CardHeader } from "./ui/card";
+import { User, Users, BookMarked } from "lucide-react";
 
-import type { UserInterface } from '../@types/user'
+import type { UserInterface } from "../@types/user";
 
 export function UserCard({ user }: { user: UserInterface }) {
   return (
     <Card className="w-full max-w-md mx-auto border-primary">
       <CardHeader className="flex flex-row items-center gap-4 pb-2">
         <img className="w-16 h-16 rounded-full" src={user.image_url} />
-        <div className="flex flex-col">
-          <h2 className="text-2xl font-bold">{user.name ?? user.username}</h2>
+        <div className="flex flex-col overflow-hidden">
+          <h2 className="text-2xl font-bold truncate whitespace-nowrap overflow-hidden text-ellipsis ">
+            {user.name ?? user.username}
+          </h2>
           <p className="text-muted-foreground">@{user.username}</p>
         </div>
       </CardHeader>
@@ -33,5 +35,5 @@ export function UserCard({ user }: { user: UserInterface }) {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

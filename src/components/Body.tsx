@@ -5,6 +5,7 @@ import type { UserInterface } from "../@types/user.d.ts";
 import { UserCard } from "./UserCard";
 
 import { useToast } from "../hooks/use-toast.ts";
+import handleError from "../utils/handleErrors.ts";
 
 type BodyProps = {
   submitValue: string;
@@ -53,15 +54,7 @@ export function Body({ submitValue }: BodyProps) {
             }
           })
           .catch((err) => {
-            let message = "";
-            console.error(err.message);
-            if (err.response?.status === 404) {
-              message = "User doesn't exist";
-            } else if (err.response?.status === 403) {
-              message = "API rate limit exceeded";
-            } else {
-              message = err.message;
-            }
+            const message = handleError(err);
             if (err.response) {
               toast({
                 variant: "destructive",

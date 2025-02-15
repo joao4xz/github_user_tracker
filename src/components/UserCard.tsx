@@ -8,7 +8,7 @@ export function UserCard({ user }: { user: UserInterface }) {
     <Card className="w-full max-w-md mx-auto border-primary">
       <CardHeader className="flex flex-row items-center gap-4 pb-2">
         <img className="w-16 h-16 rounded-full" src={user.image_url} />
-        <div className="flex flex-col overflow-hidden">
+        <div className="flex flex-col items-start overflow-hidden">
           <h2 className="text-2xl font-bold truncate whitespace-nowrap overflow-hidden text-ellipsis ">
             {user.name ?? user.username}
           </h2>

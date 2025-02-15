@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { Toaster } from "../components/ui/toaster";
 
-import { Header } from "../components/Header.tsx";
-import { Body } from "../components/Body.tsx";
+import { Header } from "../components/Home/Header.tsx";
+import { Body } from "../components/Home/Body.tsx";
 
 function Home() {
   const [submitValue, setSubmitValue] = useState("");

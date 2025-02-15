@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { fetchUserData } from "../api/github.ts";
-import type { UserInterface } from "../@types/user.d.ts";
+import { fetchUserData } from "../../api/github.ts";
+import type { UserInterface } from "../../@types/user";
 
-import { UserCard } from "./UserCard";
+import { UserCard } from "../UserCard.tsx";
 
-import { useToast } from "../hooks/use-toast.ts";
-import handleError from "../utils/handleErrors.ts";
+import { useToast } from "../../hooks/use-toast.ts";
+import handleError from "../../utils/handleErrors.ts";
+import { Link } from "react-router";
 
 type BodyProps = {
   submitValue: string;
@@ -70,7 +71,9 @@ export function Body({ submitValue }: BodyProps) {
   return (
     <div className="w-full grid grid-cols-[repeat(auto-fill,minmax(288px,4fr))] sm:grid-cols-[repeat(auto-fill, minmax(400px,4fr))] gap-4 items-center justify-items-center">
       {users.map((user) => (
-        <UserCard key={user.username} user={user} />
+        <Link to={`/profile/${user.username}`} key={user.username}>
+          <UserCard key={user.username} user={user} />
+        </Link>
       ))}
     </div>
   );

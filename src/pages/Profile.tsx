@@ -4,16 +4,22 @@ import { useParams } from "react-router";
 import { useToast } from "../hooks/use-toast.ts";
 import { Toaster } from "../components/ui/toaster";
 
-import type { UserInterface } from "../@types/user";
 import { fetchUserData } from "../api/github";
 import handleError from "../utils/handleErrors.ts";
+import { Header } from "../components/Profile/Header.tsx";
+import { Body } from "../components/Profile/Body.tsx";
+
+interface UserProfileInfoInterface {
+  username: string;
+  image_url: string;
+}
 
 function Profile() {
   const params = useParams();
 
   const { toast } = useToast();
 
-  const [user, setUser] = useState<UserInterface>();
+  const [userProfileInfo, setUserProfileInfo] = useState<UserProfileInfoInterface>();
 
   useEffect(() => {
     if (params.username) {
@@ -21,13 +27,9 @@ function Profile() {
         .then((userData) => {
           console.log(userData);
           if (userData) {
-            setUser({
-              name: userData.name,
+            setUserProfileInfo({
               username: userData.login,
               image_url: userData.avatar_url,
-              repo_num: userData.public_repos,
-              followers_num: userData.followers,
-              following_num: userData.following,
             });
           }
         })
@@ -45,11 +47,16 @@ function Profile() {
   }, []);
 
   return (
-    <>
-      <div>{params.username}</div>
-      <div>{user && user.repo_num}</div>
+    <div className="min-h-screen sm:pb-4">
+      {
+        userProfileInfo &&
+        <div className="flex flex-col items-center gap-24">
+          <Header image_url={userProfileInfo.image_url} username={userProfileInfo.username} />
+          <Body username={userProfileInfo.username} />
+        </div>
+      }
       <Toaster />
-    </>
+    </div>
   );
 }
 

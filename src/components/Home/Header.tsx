@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 type HeaderProps = {
   setSubmitValue: React.Dispatch<React.SetStateAction<string>>;

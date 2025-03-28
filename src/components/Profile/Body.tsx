@@ -23,7 +23,7 @@ export function Body({ username }: BodyProps) {
       fetchUserRepoData(username)
         .then((repoData) => {
           if (repoData) {
-            const filteredRepositories = repoData.map((repository) => ({
+            const filteredRepositories = repoData.map((repository: GitHubRepoCardProps) => ({
               name: repository.name,
               stargazers_count: repository.stargazers_count,
               updated_at: repository.updated_at,

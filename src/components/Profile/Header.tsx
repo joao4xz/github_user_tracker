@@ -1,6 +1,5 @@
 import { ChevronLeft } from "lucide-react"
 import { NavLink } from "react-router";
-import { Navigate } from "react-router";
 
 type HeaderProps = {
   image_url: string;
